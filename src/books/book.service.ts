@@ -1,9 +1,11 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { Book } from "./interfaces/book.interface";
 import { CreateBookDto } from "./dto/create-book.dto";
+import { PrismaService } from "prisma/prisma.service";
 
 @Injectable()
 export class BooksService {
+  constructor(private prisma: PrismaService) {}
   private readonly books: Book[] = [];
 
   create(createBookDto: CreateBookDto & { id: string }): Book {
