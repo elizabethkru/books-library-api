@@ -1,0 +1,14 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  bookId    String
+  text      String
+  rating    Int
+  createdAt DateTime @default(now())
+  
+  @@index([bookId])
+}
