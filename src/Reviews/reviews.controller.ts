@@ -23,26 +23,6 @@ export class ReviewsController {
     private readonly booksService: BooksService,
   ) {}
 
-  @Post(":id")
-  @Roles(["admin"])
-  @HttpCode(HttpStatus.CREATED)
-  addReview(
-    @Param("id") bookId: string,
-    @Body() review: CreateReviewDto,
-  ): Review {
-    if (!this.booksService.getBookBool(bookId)) {
-      throw new NotFoundException(`Book with ID ${bookId} not found`);
-    }
-
-    const reviewFull = {
-      id: v4(),
-      bookId: bookId,
-      ...review,
-    };
-
-    return this.reviewServise.create(reviewFull);
-  }
-
   @Get(":bookId")
   @HttpCode(HttpStatus.OK)
   getReviewsByBookId(@Param("bookId") bookId: string): Review[] {

@@ -1,5 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { Review } from './interfaces/review.interface';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { Review } from "./interfaces/review.interface";
 
 @Injectable()
 export class ReviewService {
@@ -29,7 +29,7 @@ export class ReviewService {
   deleteReview(id: string): void {
     const index = this.reviews.findIndex((b) => b.id === id);
     if (index === -1) {
-      throw new NotFoundException('Review not fount');
+      throw new NotFoundException("Review not fount");
     }
 
     this.reviews.splice(index, 1);
