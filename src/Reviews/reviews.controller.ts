@@ -48,7 +48,6 @@ export class ReviewsController {
   }
 
   @Delete(":id")
-  @Roles(["admin"])
   @HttpCode(HttpStatus.NO_CONTENT)
   delete(@Param("id") id: string): void {
     this.reviewServise.deleteReview(id);

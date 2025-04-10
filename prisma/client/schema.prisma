@@ -1,0 +1,40 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+  output          = "./client"
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [pgcrypto]
+}
+
+model Review {
+  id     String @id @default(uuid())
+  bookId String
+  text   String
+  rating Int
+}
+
+model Book {
+  id          String  @id @default(uuid())
+  name        String
+  description String?
+  author      String
+  pages       Int
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      Role     @default(USER)
+  createdAt DateTime @default(now())
+}
+
+enum Role {
+  USER
+  ADMIN
+  MODERATOR
+}
